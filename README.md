@@ -1,6 +1,4 @@
-# RLUSD-MPT
-
-RLUSD (Ripple USD) Modern Portfolio Theory (MPT) guides DeFi investors in balancing risk and reward. 
+ Modern Portfolio Theory (MPT) guides DeFi investors in balancing risk and reward. 
 
 It helps maximize returns for a specific risk level or minimize risk for a target return by diversifying investments. By combining assets with different risks and correlations, MPT aims to reduce overall portfolio risk and achieve optimal performance.
 
@@ -53,12 +51,7 @@ This project's smart-contract was deployed, and __verified__, using Sepolia's Te
 
 This project's presentation is available [here](./RLUSD-MPT.pdf).
 
-### About the author
 
-António Roldão is the creator of RLUSD-MPT. António is an entrepreneur and a passionate technologist with a Ph.D. in Electronics and Computer Engineering from Imperial College London. Antonio’s career spans diverse fields, including aerospace, finance, and artificial intelligence. He is the co-founder and CEO of [muse.ai](https://muse.ai), where he has pioneered advanced video search technology leveraging cutting-edge AI. Antonio combines deep technical expertise with a drive to create technologies that empower people and simplify complexity.
-
-## Contributing
-We welcome contributions to enhance RLUSD-MPT! Please submit issues or pull requests to this repository.
 
 ## License
 This project is licensed under the MIT License.
