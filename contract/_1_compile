@@ -1,0 +1,76 @@
+#!/usr/bin/env python3
+
+# Compile the smart contract and produce abi/bin files.
+
+import os
+import subprocess
+DIR_THIS = os.path.abspath(os.path.dirname(__file__))
+
+from config import CONTRACT
+
+CONTRACT_SOL = f"{CONTRACT}.sol"
+
+
+def _docker_build():
+    EXE_BUILD_SOLC = DIR_THIS + '/solc/_build'
+    p = subprocess.run(EXE_BUILD_SOLC)
+    if p.returncode != 0:
+        pass
+
+
+def solc_version():
+    cmd = ['docker', 'run', '--platform=linux/amd64', 'solc', '--version']
+    p = subprocess.run(cmd)
+    if p.returncode != 0:
+        pass
+
+
+def contract_compile(contract_sol=CONTRACT_SOL):
+    solc_version()
+    params = [
+        'docker',
+        'run',
+        '--platform=linux/amd64',
+        '-v', f"{DIR_THIS}/src:/src",
+        'solc',
+        '--base-path', '.',
+        '--include-path', 'node_modules/',
+        '--include-path', '/usr/local/lib/node_modules/',
+        '--optimize',
+        '-o', '/src/output',
+        '--abi', '--bin',
+        '--overwrite',
+        f"/src/{contract_sol}"
+    ]
+    subprocess.run(params)
+
+
+def contract_json_and_meta(contract_sol=CONTRACT_SOL):
+    # This is used to generate <name>_meta.json that can be used to validate contracts on Block-Explorers.
+    solc_version()
+    params = [
+        'docker',
+        'run',
+        '--platform=linux/amd64',
+        '-v', f"{DIR_THIS}/src:/src",
+        'solc',
+        '--base-path', '.',
+        '--include-path', 'node_modules/',
+        '--include-path', '/usr/local/lib/node_modules/',
+        '--optimize',
+        '--evm-version', 'london',
+        '-o', '/src/output',
+        '--abi', '--bin',
+        '--overwrite',
+        '--combined-json', 'abi,bin,ast,metadata,devdoc,userdoc,generated-sources,generated-sources-runtime',
+        '--metadata', '--metadata-literal',
+        f"/src/{contract_sol}"
+    ]
+    subprocess.run(params)
+
+
+if __name__ == "__main__":
+    pass
+    # solc_version()
+    # contract_compile()
+    contract_json_and_meta()
